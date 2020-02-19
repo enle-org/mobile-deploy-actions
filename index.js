@@ -8,7 +8,8 @@ try {
   const EXPO_PASSWORD	 = core.getInput('expo_password');
 
   exec.exec('yarn')
-    .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
+  .then(() => exec.exec(`yarn global add expo-cli`))
+  .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     .then(() => exec.exec(`yarn build:android`))
   // `who-to-greet` input defined in action metadata file
   // const nameToGreet = core.getInput('who-to-greet');
