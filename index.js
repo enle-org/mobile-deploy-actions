@@ -3,8 +3,13 @@ const github = require('@actions/github');
 const exec = require('@actions/exec');
 
 try {
-  exec.exec('npm install')
+
+  const EXPO_USERNAME	 = core.getInput('expo_username');
+  const EXPO_PASSWORD	 = core.getInput('expo_password');
+
   exec.exec('yarn')
+  exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`)
+  exec.exec(`yarn build:android`)
   // `who-to-greet` input defined in action metadata file
   // const nameToGreet = core.getInput('who-to-greet');
   // console.log(`Hello ${nameToGreet}!`);
