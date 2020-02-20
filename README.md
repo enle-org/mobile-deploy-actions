@@ -2,7 +2,7 @@
 
 This action prints builds a React-Native app, builds binaries for iOS and Android using Expo and deploys them using Firebase App Distribution.
 
-**Only android supported for now**
+`*Only android supported for now`
 
 ## Inputs
 
