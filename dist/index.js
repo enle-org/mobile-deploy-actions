@@ -19252,7 +19252,7 @@ try {
 
   exec.exec(`yarn`)
     .then(() => exec.exec(`yarn global add expo-cli`))
-    .then(() => exec.exec(`curl -sL https://firebase.tools | bash`))
+    .then(() => exec.exec(`yarn global add firebase-tools`))
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     .then(() => exec.exec(`yarn build:android > output.txt`))
     .then(() => exec.exec(`tail -n 2 ./output.txt | head -n 1 | cut -c47- | xargs wget -O build.apk`))
