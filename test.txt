@@ -1,7 +1,0 @@
-yarn run v1.17.3
-$ ncc build index.js
-ncc: Version 0.21.1
-ncc: Compiling file index.js
-640kB  dist/index.js
-640kB  [1262ms] - ncc 0.21.1
-Done in 1.45s.
