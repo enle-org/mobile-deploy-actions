@@ -1,21 +1,35 @@
-# Hello world javascript action
+# Mobile Deployment Github Action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action prints builds a React-Native app, builds binaries for iOS and Android using Expo and deploys them using Firebase App Distribution.
+
+**Only android supported for now**
 
 ## Inputs
 
-### `who-to-greet`
+### `expo_username`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** Username for expo account.
 
-## Outputs
+### `expo_password`
 
-### `time`
+**Required** Password for expo account.
 
-The time we greeted you.
+### `firebase_token`
+
+**Required** Token for auth with firbase.
+
+### `firebase_android_app_id`
+
+**Required** App ID for firebase android app.
 
 ## Example usage
 
-uses: actions/hello-world-javascript-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+```
+- name: Create binary and deploy
+  uses: enle-org/mobile-deploy-action@master
+  with:
+    expo_username: ${{ secrets.EXPO_USERNAME }}
+    expo_password: ${{ secrets.EXPO_PASSWORD }}
+    firebase_token: ${{ secrets.FIREBASE_TOKEN }}
+    firebase_android_app_id: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
+```
