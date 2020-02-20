@@ -13,7 +13,7 @@ try {
     .then(() => exec.exec(`yarn global add expo-cli`))
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     .then(() => exec.exec(`yarn build:android > output.txt`))
-    .then(() => exec.exec(`tail -n 3 ./output.txt | head -n 1 | cut -c47- | xargs wget`))
+    .then(() => exec.exec(`tail -n 2 ./output.txt | head -n 1 | cut -c47- | xargs wget`))
     .catch(e => core.setFailed(e));
     
 } catch (error) {
