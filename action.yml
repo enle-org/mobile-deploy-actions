@@ -1,13 +1,18 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Mobile Deployment Github Action'
+description: 'This action prints builds a React-Native app, builds binaries for iOS and Android using Expo and deploys them using Firebase App Distribution. *Only android supported for now'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  expo_username:
+    description: 'Username for expo account'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  expo_password:
+    description: 'Password for expo account'
+    required: true
+  firebase_token:
+    description: 'Token for auth with firbase'
+    required: true
+  firebase_android_app_id:
+    description: 'App ID for firebase android app'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
