@@ -7,19 +7,16 @@ try {
   const EXPO_USERNAME	 = core.getInput('expo_username');
   const EXPO_PASSWORD	 = core.getInput('expo_password');
 
-  exec.exec('yarn')
-  .then(() => exec.exec(`yarn global add expo-cli`))
-  .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
-    .then(() => exec.exec(`yarn build:android`))
-  // `who-to-greet` input defined in action metadata file
-  // const nameToGreet = core.getInput('who-to-greet');
-  // console.log(`Hello ${nameToGreet}!`);
-  
-  // const time = (new Date()).toTimeString();
-  // core.setOutput("time", time);
-  // // Get the JSON webhook payload for the event that triggered the workflow
-  // const payload = JSON.stringify(github.context.payload, undefined, 2)
-  // console.log(`The event payload: ${payload}`);
+  exec.exec('/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
+    .then(() => exec.exec(`brew install wget`))
+    .then(() => exec.exec(`yarn`))
+    .then(() => exec.exec(`yarn global add expo-cli`))
+    .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
+    .then(() => exec.exec(`yarn build:android > output.txt`))
+    .then(() => exec.exec(`tail -n 3 ./output.txt | head -n 1 | cut -c47- | xargs wget`))
+    
 } catch (error) {
   core.setFailed(error.message);
 }
+
+// Successfully built standalone app: https://expo.io/artifacts/1b9a6ef8-db97-4274-8812-5d0865cb46fc
