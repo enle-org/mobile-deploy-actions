@@ -19248,7 +19248,7 @@ try {
   const EXPO_USERNAME	 = core.getInput('expo_username');
   const EXPO_PASSWORD	 = core.getInput('expo_password');
 
-  exec.exec('curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | xargs -0 /usr/bin/ruby -e')
+  exec.exec('curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install')
     .then(() => exec.exec(`brew install wget`))
     .then(() => exec.exec(`yarn`))
     .then(() => exec.exec(`yarn global add expo-cli`))
