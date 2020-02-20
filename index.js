@@ -7,13 +7,14 @@ try {
   const EXPO_USERNAME	 = core.getInput('expo_username');
   const EXPO_PASSWORD	 = core.getInput('expo_password');
 
-  exec.exec('/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
+  exec.exec('curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | xargs -0 /usr/bin/ruby -e')
     .then(() => exec.exec(`brew install wget`))
     .then(() => exec.exec(`yarn`))
     .then(() => exec.exec(`yarn global add expo-cli`))
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     .then(() => exec.exec(`yarn build:android > output.txt`))
     .then(() => exec.exec(`tail -n 3 ./output.txt | head -n 1 | cut -c47- | xargs wget`))
+    .catch(e => core.setFailed(e));
     
 } catch (error) {
   core.setFailed(error.message);
