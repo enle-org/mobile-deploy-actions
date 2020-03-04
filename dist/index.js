@@ -19256,10 +19256,10 @@ try {
   const options = {};
   options.listeners = {
     stdout: (data) => {
-      myOutput += data.toString();
+      myOutput = data.toString();
     },
     stderr: (data) => {
-      myError += data.toString();
+      myError = data.toString();
     }
   };
 
@@ -19269,10 +19269,11 @@ try {
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     // .then(() => exec.exec(`yarn build:android`))
     .then(() => exec.exec(`ls`))
-    .then(() => exec.exec(`tail -n 1 ./output.txt`, options))
+    .then(() => exec.exec(`tail -n 1 output.txt`, options))
     .then(res => {
       console.log("res", res)
       console.log("myOutput", myOutput)
+      exec.exec(`ls`)
     })
     // .then(() => exec.exec(`tail -n 1 output.txt | head -n 1 | cut -c47- | xargs wget -O build.apk`))
     // .then(() => exec.exec(`firebase appdistribution:distribute ./build.apk --app ${FIREBASE_ANDROID_APP_ID} --groups ${TEST_GROUP} --token ${FIREBASE_TOKEN}`))
