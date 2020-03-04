@@ -14,7 +14,7 @@ try {
     .then(() => exec.exec(`yarn global add firebase-tools`))
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     .then(() => exec.exec(`yarn build:android`))
-    .then(() => exec.exec(`tail -n 2 ./output.txt | head -n 1 | cut -c47- | xargs wget -O build.apk`))
+    .then(() => exec.exec(`tail -n 2 ./output.txt | head -n 2 | cut -c47- | xargs wget -O build.apk`))
     .then(() => exec.exec(`firebase appdistribution:distribute ./build.apk --app ${FIREBASE_ANDROID_APP_ID} --groups ${TEST_GROUP} --token ${FIREBASE_TOKEN}`))
     .catch(e => core.setFailed(e));
     
