@@ -15,7 +15,7 @@ try {
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     // .then(() => exec.exec(`yarn build:android`))
     .then(() => exec.exec(`ls`))
-    .then(() => exec.exec(`tail -n 1 ./output.txt`))
+    .then(() => exec.exec(`tail -n 1 ./output.txt | head -n 1 | cut -c47-`))
     .then(res => {
       console.log("res", res)
       exec.exec(`head -n 1`)
