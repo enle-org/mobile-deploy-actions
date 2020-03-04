@@ -19250,16 +19250,29 @@ try {
   const FIREBASE_TOKEN	 = core.getInput('firebase_token');
   const FIREBASE_ANDROID_APP_ID	 = core.getInput('firebase_android_app_id');
 
+  let myOutput = '';
+  let myError = '';
+
+  const options = {};
+  options.listeners = {
+    stdout: (data) => {
+      myOutput += data.toString();
+    },
+    stderr: (data) => {
+      myError += data.toString();
+    }
+  };
+
   exec.exec(`yarn`)
     .then(() => exec.exec(`yarn global add expo-cli`))
     .then(() => exec.exec(`yarn global add firebase-tools`))
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     // .then(() => exec.exec(`yarn build:android`))
     .then(() => exec.exec(`ls`))
-    .then(() => exec.exec(`tail -n 1 ./output.txt | head -n 1 | cut -c47-`))
+    .then(() => exec.exec(`tail -n 1 ./output.txt`, options))
     .then(res => {
       console.log("res", res)
-      exec.exec(`head -n 1`)
+      console.log("myOutput", myOutput)
     })
     // .then(() => exec.exec(`tail -n 1 output.txt | head -n 1 | cut -c47- | xargs wget -O build.apk`))
     // .then(() => exec.exec(`firebase appdistribution:distribute ./build.apk --app ${FIREBASE_ANDROID_APP_ID} --groups ${TEST_GROUP} --token ${FIREBASE_TOKEN}`))
