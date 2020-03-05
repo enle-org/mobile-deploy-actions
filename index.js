@@ -36,9 +36,11 @@ try {
     // .then(() => exec.exec(`firebase appdistribution:distribute ./build.apk --app ${FIREBASE_ANDROID_APP_ID} --groups ${TEST_GROUP} --token ${FIREBASE_TOKEN}`))
     // .catch(e => core.setFailed(e));
 
-  exec.exec('tail', ['-n 1', 'output.txt'], options)
-      .then(() => exec.exec('cut', ['-c47-', `<<< "${myOutput}\"`]))
-      .catch(e => core.setFailed(e));
+    exec.exec('yarn download-build');
+
+    // exec.exec('tail', ['-n 1', 'output.txt'], options)
+    //   .then(() => exec.exec('cut', ['-c47-', `<<< "${myOutput}\"`]))
+    //   .catch(e => core.setFailed(e));
     
 } catch (error) {
   core.setFailed(error.message);
