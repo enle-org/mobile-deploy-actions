@@ -26,9 +26,9 @@ try {
   };
 
   exec.exec(`yarn`)
-    .then(() => exec.exec('yarn global add expo-cli'))
-    .then(() => exec.exec('yarn global add firebase-tools'))
-    .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
+    // .then(() => exec.exec('yarn global add expo-cli'))
+    // .then(() => exec.exec('yarn global add firebase-tools'))
+    // .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     // .then(() => exec.exec(`yarn build:android`))
     // .then(() => exec.exec('ls'))
     .then(() => exec.exec('tail', ['-n 1', 'output.txt'], options))
