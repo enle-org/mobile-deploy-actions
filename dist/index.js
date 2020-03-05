@@ -19278,7 +19278,7 @@ try {
     // .catch(e => core.setFailed(e));
 
   exec.exec('tail', ['-n 1', 'output.txt'], options)
-      .then(() => exec.exec('cut', ['-c47-', `<<< '${myOutput}'`], { windowsVerbatimArguments: true }))
+      .then(() => exec.exec('cut', ['-c47-', `<<< "${myOutput}"`], { windowsVerbatimArguments: true }))
       .catch(e => core.setFailed(e));
     
 } catch (error) {
