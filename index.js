@@ -16,11 +16,9 @@ try {
   options.listeners = {
     stdline: (data) => console.log("stdline data", data()),
     stdout: (data) => {
-      console.log("stdout data.toString()", data.toString())
       myOutput = data.toString();
     },
     stderr: (data) => {
-      console.log("data.toString()", data.toString())
       myError = data.toString();
     }
   };
@@ -39,7 +37,7 @@ try {
     // .catch(e => core.setFailed(e));
 
   exec.exec('tail', ['-n 1', 'output.txt'], options)
-      .then(() => exec.exec('cut', ['-c47-', `<<< '${myOutput}'`]))
+      .then(() => exec.exec('cut', ['-c47-', `<<< '${myOutput}'`], { windowsVerbatimArguments: true }))
       .catch(e => core.setFailed(e));
     
 } catch (error) {
