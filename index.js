@@ -25,6 +25,7 @@ try {
   const FIREBASE_ANDROID_APP_ID = core.getInput('firebase_android_app_id');
 
   exec.exec(`ls`)
+    .then(() => exec.exec('pwd'))
 
   // exec.exec(`yarn`)
   //   .then(() => exec.exec('yarn global add expo-cli'))
