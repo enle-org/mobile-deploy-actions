@@ -30,8 +30,6 @@ try {
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     .then(() => exec.exec('chmod +x ./deploy.sh'))
     .then(() => exec.exec(`./deploy.sh ${ENVIRONMENT} ${CLOUDINARY_CLOUDNAME} ${CLOUDINARY_URL} ${CLOUDINARY_API_KEY} ${CLOUDINARY_API_SECRET} ${CLOUDINARY_API_URL} ${CLOUDINARY_API_URL_STRING} ${TEST_USER_EMAIL} ${TEST_USER_PASSWORD} ${LOCAL_API_URL} ${DEV_API_URL} ${STAGING_API_URL} ${PROD_API_URL}`))
-    // .then(() => exec.exec('yarn build:android'))
-    // .then(() => exec.exec('yarn download-build'))
     .then(() => exec.exec(`firebase appdistribution:distribute ./build.apk --app ${FIREBASE_ANDROID_APP_ID} --groups ${TEST_GROUP} --token ${FIREBASE_TOKEN}`))
     .catch(e => core.setFailed(e));
     
