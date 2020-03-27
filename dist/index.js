@@ -1487,11 +1487,16 @@ try {
     .then(() => exec.exec('yarn global add expo-cli'))
     .then(() => exec.exec('yarn global add firebase-tools'))
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
-    .then(() => exec.exec('chmod +x ./deploy.sh'))
-    .then(() => exec.exec(`./deploy.sh ${ENVIRONMENT} ${CLOUDINARY_CLOUDNAME} ${CLOUDINARY_URL} ${CLOUDINARY_API_KEY} ${CLOUDINARY_API_SECRET} ${CLOUDINARY_API_URL} ${CLOUDINARY_API_URL_STRING} ${TEST_USER_EMAIL} ${TEST_USER_PASSWORD} ${LOCAL_API_URL} ${DEV_API_URL} ${STAGING_API_URL} ${PROD_API_URL} ${APPLE_ID_EMAIL} ${APPLE_ID_PASSWORD}`))
+    .then(() => exec.exec('chmod +x ./deploy.android.sh'))
+    .then(() => exec.exec(`./deploy.android.sh ${ENVIRONMENT} ${CLOUDINARY_CLOUDNAME} ${CLOUDINARY_URL} ${CLOUDINARY_API_KEY} ${CLOUDINARY_API_SECRET} ${CLOUDINARY_API_URL} ${CLOUDINARY_API_URL_STRING} ${TEST_USER_EMAIL} ${TEST_USER_PASSWORD} ${LOCAL_API_URL} ${DEV_API_URL} ${STAGING_API_URL} ${PROD_API_URL} ${APPLE_ID_EMAIL} ${APPLE_ID_PASSWORD}`))
     .then(() => exec.exec(`firebase appdistribution:distribute ./build.apk --app ${FIREBASE_ANDROID_APP_ID} --groups ${TEST_GROUP} --token ${FIREBASE_TOKEN}`))
+    .then(() => exec.exec('chmod +x ./deploy.ios.sh'))
+    .then(() => exec.exec(`./deploy.ios.sh ${ENVIRONMENT} ${CLOUDINARY_CLOUDNAME} ${CLOUDINARY_URL} ${CLOUDINARY_API_KEY} ${CLOUDINARY_API_SECRET} ${CLOUDINARY_API_URL} ${CLOUDINARY_API_URL_STRING} ${TEST_USER_EMAIL} ${TEST_USER_PASSWORD} ${LOCAL_API_URL} ${DEV_API_URL} ${STAGING_API_URL} ${PROD_API_URL} ${APPLE_ID_EMAIL} ${APPLE_ID_PASSWORD}`))
     .then(() => exec.exec(`firebase appdistribution:distribute ./build.ipa --app ${FIREBASE_IOS_APP_ID} --groups ${TEST_GROUP} --token ${FIREBASE_TOKEN}`))
-    .catch(e => core.setFailed(e));
+    .catch(e => {
+      console.log('error', e);
+      core.setFailed(e);
+    });
     
 } catch (error) {
   core.setFailed(error.message);
