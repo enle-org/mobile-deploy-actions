@@ -1482,6 +1482,7 @@ try {
 
   const APPLE_ID_EMAIL = core.getInput('apple_id_email');
   const APPLE_ID_PASSWORD = core.getInput('apple_id_password');
+  const FIREBASE_IOS_APP_ID = core.getInput('firebase_ios_app_id');
 
   exec.exec(`yarn`)
     .then(() => exec.exec('yarn global add expo-cli'))
