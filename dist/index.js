@@ -1489,12 +1489,14 @@ try {
   const APPLE_ID_PASSWORD = core.getInput('apple_id_password');
   const FIREBASE_IOS_APP_ID = core.getInput('firebase_ios_app_id');
 
+  const ANDROID_KEYSTORE_PASSWORD = core.getInput('android_keystore_password');
+
   exec.exec(`yarn`)
     .then(() => exec.exec('yarn global add expo-cli'))
     .then(() => exec.exec('yarn global add firebase-tools'))
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     .then(() => exec.exec('chmod +x ./deploy-scripts/deploy.android.sh'))
-    .then(() => exec.exec(`./deploy-scripts/deploy.android.sh ${ENVIRONMENT} ${CLOUDINARY_CLOUDNAME} ${CLOUDINARY_URL} ${CLOUDINARY_API_KEY} ${CLOUDINARY_API_SECRET} ${CLOUDINARY_API_URL} ${CLOUDINARY_API_URL_STRING} ${SENTRY_DSN} ${SENTRY_ORGANIZATION} ${SENTRY_PROJECT} ${SENTRY_AUTHTOKEN} ${TEST_USER_EMAIL} ${TEST_USER_PASSWORD} ${LOCAL_API_URL} ${DEV_API_URL} ${STAGING_API_URL} ${PROD_API_URL} ${APPLE_ID_EMAIL} ${APPLE_ID_PASSWORD}`))
+    .then(() => exec.exec(`./deploy-scripts/deploy.android.sh ${ENVIRONMENT} ${CLOUDINARY_CLOUDNAME} ${CLOUDINARY_URL} ${CLOUDINARY_API_KEY} ${CLOUDINARY_API_SECRET} ${CLOUDINARY_API_URL} ${CLOUDINARY_API_URL_STRING} ${SENTRY_DSN} ${SENTRY_ORGANIZATION} ${SENTRY_PROJECT} ${SENTRY_AUTHTOKEN} ${TEST_USER_EMAIL} ${TEST_USER_PASSWORD} ${LOCAL_API_URL} ${DEV_API_URL} ${STAGING_API_URL} ${PROD_API_URL} ${ANDROID_KEYSTORE_PASSWORD} ${APPLE_ID_EMAIL} ${APPLE_ID_PASSWORD}`))
     .then(() => exec.exec(`firebase appdistribution:distribute ./android/app/build/outputs/apk/release/app-release.apk --app ${FIREBASE_ANDROID_APP_ID} --groups ${TEST_GROUP} --token ${FIREBASE_TOKEN}`))
     // .then(() => exec.exec('chmod +x ./deploy-scripts/deploy.ios.sh'))
     // .then(() => exec.exec(`./deploy-scripts/deploy.ios.sh ${ENVIRONMENT} ${CLOUDINARY_CLOUDNAME} ${CLOUDINARY_URL} ${CLOUDINARY_API_KEY} ${CLOUDINARY_API_SECRET} ${CLOUDINARY_API_URL} ${CLOUDINARY_API_URL_STRING} ${SENTRY_DSN} ${SENTRY_ORGANIZATION} ${SENTRY_PROJECT} ${SENTRY_AUTHTOKEN} ${TEST_USER_EMAIL} ${TEST_USER_PASSWORD} ${LOCAL_API_URL} ${DEV_API_URL} ${STAGING_API_URL} ${PROD_API_URL} ${APPLE_ID_EMAIL} ${APPLE_ID_PASSWORD}`))
