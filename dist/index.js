@@ -1491,8 +1491,7 @@ try {
 
   const ANDROID_KEYSTORE_PASSWORD = core.getInput('android_keystore_password');
 
-  exec.exec(`yarn`)
-    .then(() => exec.exec('yarn global add expo-cli'))
+  exec.exec('yarn global add expo-cli')
     .then(() => exec.exec('yarn global add firebase-tools'))
     .then(() => exec.exec(`yarn run expo login -u ${EXPO_USERNAME} -p ${EXPO_PASSWORD}`))
     .then(() => exec.exec('chmod +x ./deploy-scripts/create-env.sh'))
